@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CursoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Llamar a un controlador, HomeController y el metodo invoke (/)
+Route::get("/", HomeController::class);
+
+//Grupo de rutas al controllador CursoController
+Route::controller(CursoController::class)->group(function(){
+    Route::get("cursos", "index");
+    Route::get("cursos/create", "create");
+    Route::get("cursos/{curso}", "show");
 });
 
+/*
+//Llamar a un controlador, CursoController y el metodo index (localhost/devstagram/public/cursos)
+Route::get("cursos", [CursoController::class, "index"]);
 
+//Llamar a un controlador, CursoController y el metodo create (localhost/devstagram/public/cursos/create)
+Route::get("cursos/create", [CursoController::class, "create"]);
+
+//Llamar a un controlador, CursoController y el metodo show (localhost/devstagram/public/cursos/curso)
+Route::get("cursos/{curso}", [CursoController::class, "show"]);
+ */
+
+/* 
 //crear una ruta
 Route::get('cursos', function(){
     return "Cursos";
@@ -41,3 +61,4 @@ Route::get("cursos/{curso}/{categoria?}", function($curso, $categoria = null){
         return "Bienvenido al curso: $curso";
     }
 });
+ */
