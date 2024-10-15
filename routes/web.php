@@ -17,7 +17,9 @@ use App\Http\Controllers\CursoController;
 */
 
 //Llamar a un controlador, HomeController y el metodo invoke (/)
-Route::get("/", HomeController::class);
+Route::get("/", HomeController::class)->name("home");
+
+Route::view("nosotros", 'nosotros')->name("nosotros");
 
 //Agrupar rutas con route resource
 Route::resource("cursos", CursoController::class);
