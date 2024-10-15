@@ -23,6 +23,7 @@ class StroreCurso extends FormRequest
     {
         return [
             "name" => "required|min:3",
+            "slug" => "required|unique:cursos",
             "description" => ["required", 'min:10', 'max:200'],
             "category" => "required"
         ];

@@ -44,11 +44,11 @@ class CursoController extends Controller
         ]); */
 
         $curso = Curso::create($request->all());
-        return redirect()->route("cursos.show", $curso->id);
+        return redirect()->route("cursos.show", $curso);
     }
 
-    public function show($id){
-        $curso = Curso::find($id);
+    public function show(Curso $curso){
+        //$curso = Curso::find($curso);
         return view("cursos.show", compact("curso"));
         //return view("cursos.show", ["curso" => $curso]);
     }
@@ -62,6 +62,7 @@ class CursoController extends Controller
         //Agregar validaciones
         $request->validate([
             "name" => "required|min:3",
+            "slug" => "required|unique:cursos,slug, $curso->id",
             "description" => ["required", 'min:10', 'max:200'],
             "category" => "required"
         ],[
@@ -78,7 +79,7 @@ class CursoController extends Controller
 
         $curso->update($request->all());
 
-        return redirect()->route("cursos.show", $curso->id);
+        return redirect()->route("cursos.show", $curso);
     }
 
     public function destroy(Curso $curso){
