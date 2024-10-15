@@ -19,8 +19,13 @@ use App\Http\Controllers\CursoController;
 //Llamar a un controlador, HomeController y el metodo invoke (/)
 Route::get("/", HomeController::class);
 
+//Agrupar rutas con route resource
+Route::resource("cursos", CursoController::class);
+//Agrupar rutas con route resource pero cambiando los nombres de los parametros
+//Route::resource("asignaturas", CursoController::class)->parameters(['asignaturas'=>'curso'])->names('cursos');
+
 //Grupo de rutas al controllador CursoController
-Route::controller(CursoController::class)->group(function(){
+/* Route::controller(CursoController::class)->group(function(){
     Route::get("cursos", "index")->name("cursos.index");
     Route::get("cursos/create", "create")->name("cursos.create");
     Route::post("cursos", [CursoController::class, 'store'])->name('cursos.store'); 
@@ -28,7 +33,7 @@ Route::controller(CursoController::class)->group(function(){
     Route::get("cursos/{curso}/edit", [CursoController::class, 'edit'])->name("cursos.edit");
     Route::put("cursos/{curso}", [CursoController::class, 'update'])->name("cursos.update");
     Route::delete("cursos/{curso}", [CursoController::class, "destroy"])->name("cursos.destroy");
-});
+}); */
 
 /*
 //Llamar a un controlador, CursoController y el metodo index (localhost/devstagram/public/cursos)
