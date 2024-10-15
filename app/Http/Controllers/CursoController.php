@@ -21,6 +21,14 @@ class CursoController extends Controller
     }
 
     public function store(Request $request){
+
+        //Agregar validaciones
+        $request->validate([
+            "name" => "required|min:3",
+            "description" => ["required", 'min:10', 'max:200'],
+            "category" => "required"
+        ]);
+
         $curso = new Curso();
 
         $curso->name = $request->name;
@@ -41,6 +49,15 @@ class CursoController extends Controller
     }
 
     public function update(Curso $curso, Request $request){
+
+        //Agregar validaciones
+        $request->validate([
+            "name" => "required|min:3",
+            "description" => ["required", 'min:10', 'max:200'],
+            "category" => "required"
+        ]);
+
+        
         $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
