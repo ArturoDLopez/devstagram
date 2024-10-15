@@ -3,22 +3,24 @@
 @section('title', 'Cursos')
 
 @section('content')
-    <h1>En esta pagina se pueden crear cursos</h1>
+    <h1>Editar un curso</h1>
     
-    <form action="{{route('cursos.store')}}" method="POST">
+    <form action="{{route('cursos.update', $curso)}}" method="POST">
 
         @csrf
+
+        @method('put')
         <label for="">
             Nombre:
             <br>
-            <input name="name" type="text">
+            <input name="name" type="text" value="{{$curso->name}}">
         </label>
 
         <br>
         <label for="">
             Descripcion:
             <br>
-            <textarea name="description"></textarea>
+            <textarea name="description" >{{$curso->description}}</textarea>
         </label>
 
         <br>
@@ -26,9 +28,9 @@
         <label for="">
             Categoria:
             <br>
-            <input name="category" type="text">
+            <input name="category" type="text" value="{{$curso->category}}">
         </label>
         <br>
-        <button>Enviar formulario</button>
+        <button>Actualizar formulario</button>
     </form>
 @endsection
