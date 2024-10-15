@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StroreCurso;
 use App\Models\Curso;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,15 @@ class CursoController extends Controller
         return view("cursos.create");
     }
 
-    public function store(Request $request){
+    public function store(StroreCurso $request){
 
-        //Agregar validaciones
+        /* //Agregar validaciones
         $request->validate([
             "name" => "required|min:3",
             "description" => ["required", 'min:10', 'max:200'],
             "category" => "required"
         ]);
-
+ */
         $curso = new Curso();
 
         $curso->name = $request->name;
@@ -55,9 +56,13 @@ class CursoController extends Controller
             "name" => "required|min:3",
             "description" => ["required", 'min:10', 'max:200'],
             "category" => "required"
+        ],[
+            'description.required' => 'Debe ingresar una descripción del curso'
+        ],[
+            'name' => 'nombre del curso'
         ]);
 
-        
+
         $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
