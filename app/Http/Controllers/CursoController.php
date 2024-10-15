@@ -30,12 +30,20 @@ class CursoController extends Controller
             "category" => "required"
         ]);
  */
-        $curso = new Curso();
+        /* $curso = new Curso();
 
         $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
-        $curso->save();
+        $curso->save(); */
+
+        /* $curso = Curso::create([
+            'name' => $request->name,
+            "description" => $request->description,
+            "category" => $request->category
+        ]); */
+
+        $curso = Curso::create($request->all());
         return redirect()->route("cursos.show", $curso->id);
     }
 
@@ -63,10 +71,13 @@ class CursoController extends Controller
         ]);
 
 
-        $curso->name = $request->name;
+        /* $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
-        $curso->save();
+        $curso->save(); */
+
+        $curso->update($request->all());
+        
         return redirect()->route("cursos.show", $curso->id);
     }
 }
